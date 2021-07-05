@@ -1,7 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Route, Switch, Redirect} from "react-router-dom";
 import {Container} from "react-bootstrap";
-import "./App.css";
 import Registration from "./pages/Registration";
 import Login from "./pages/Login";
 import { Chat } from './chat/Chat';

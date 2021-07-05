@@ -5,6 +5,8 @@ import { MessagesPanel } from './MessagesPanel';
 import socketClient from "socket.io-client";
 
 const SERVER = "http://127.0.0.1:8080";
+var array = []
+var list = []
 
 export class Chat extends React.Component {
 
@@ -71,7 +73,11 @@ export class Chat extends React.Component {
 
     handleSendMessage = (channel_id, text) => {
         const name = localStorage.getItem('name');
-        this.socket.emit('send-message', { channel_id, text, senderName: name, id: Date.now() });
+        if (name) {
+            array.push(name)
+            list.push(this.socket.id)
+        }
+        this.socket.emit('send-message', { channel_id, text, senderName: array[list.indexOf(this.socket.id)], id: Date.now() });
         localStorage.removeItem("name");
     }
 
@@ -85,6 +91,3 @@ export class Chat extends React.Component {
         );
     }
 }
-
-var array = require('../pages/Login')
-console.log(array)

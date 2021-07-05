@@ -65,7 +65,7 @@ export default function Registration() {
                   </Form.Group>
                   <Form.Group id={"Password"}>
                     <Form.Label>Password</Form.Label>
-                    <Form.Control type="text" ref={passwordRef}
+                    <Form.Control type="password" ref={passwordRef}
                                   placeholder="Password"
                                   onChange={(e) => {
                                     setPasswordReg(e.target.value);
