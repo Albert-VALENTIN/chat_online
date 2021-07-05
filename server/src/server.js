@@ -14,6 +14,9 @@ var STATIC_CHANNELS = [{
     sockets: []
 }];
 
+var id = 3;
+var array = []
+
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
@@ -65,7 +68,6 @@ io.on('connection', (socket) => { // socket object may be used to send specific 
             }
         });
     });
-
 });
 
 app.get('/getChannels', (req, res) => {
@@ -73,8 +75,6 @@ app.get('/getChannels', (req, res) => {
         channels: STATIC_CHANNELS
     })
 });
-
-
 
 
 const test = require("express");
@@ -110,6 +110,17 @@ tmp.use(
 );
 
 const routeAuth = require('./Routes/Auth/Auth')
+
+tmp.post("/channelAdd", (req, res) => {
+    const username = req.body.username;
+    var tmp = (array.indexOf(username) > -1);
+
+    if (!tmp) {
+        array.push(username)
+        STATIC_CHANNELS.push({name: JSON.stringify(username), participants: 0, id: id++, sockets: []})
+    }
+    console.log(STATIC_CHANNELS)
+});
 
 tmp.use(routeAuth)
 

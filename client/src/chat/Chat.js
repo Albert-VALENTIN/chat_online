@@ -28,8 +28,11 @@ export class Chat extends React.Component {
                 this.handleChannelSelect(this.state.channel.id);
             }
         });
-        socket.on('channel', channel => {
-
+        socket.on('channel', async channel => {
+            //await this.loadChannels();
+            console.log(this.state.channels)
+            if (this.state.channels === null)
+                return;
             let channels = this.state.channels;
             channels.forEach(c => {
                 if (c.id === channel.id) {
@@ -38,8 +41,10 @@ export class Chat extends React.Component {
             });
             this.setState({ channels });
         });
-        socket.on('message', message => {
-
+        socket.on('message', async message => {
+            console.log(this.state.channels)
+            if (this.state.channels === null)
+                return;
             let channels = this.state.channels
             channels.forEach(c => {
                 if (c.id === message.channel_id) {
