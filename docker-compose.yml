@@ -2,6 +2,9 @@ version: '3'
 services:
   # Create frontend container
   frontend: # Name of our service
+
+    environment:
+      - API_HOST="http://localhost:3001"
     build: ./client # path to dockerfile
     ports: # Port binding to host from docker container
       - "3000:3000" # Bind port 3000 of host to 3000 of container
@@ -12,6 +15,8 @@ services:
   # Create backend container
   backend:
     # Create backend container
+    environment:
+      - API_HOST="http://localhost:3000"
     build: ./server
     ports:
       - "8080:8080"

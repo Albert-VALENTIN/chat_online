@@ -2,6 +2,13 @@ var app = require('express')();
 var http = require('http').createServer(app);
 const PORT = 8080;
 var io = require('socket.io')(http);
+
+const test = require("express");
+const cors = require("cors");
+
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const session = require("express-session");
 var STATIC_CHANNELS = [{
     name: 'First Channel',
     participants: 0,
@@ -75,14 +82,6 @@ app.get('/getChannels', (req, res) => {
         channels: STATIC_CHANNELS
     })
 });
-
-
-const test = require("express");
-const cors = require("cors");
-
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
 
 const tmp = test();
 
